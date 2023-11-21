@@ -49,29 +49,36 @@ public class SimulatedComputer {
 
     switch (opcode) {
       case 0: // NOP
+        System.out.println("NOP");
         break;
       case 1: // ADD
         registers[destReg] = (value1 + value2) % MAX_BYTE_VALUE;
+        System.out.println("ADD "+ value1 + " "+ value2 + " "+ destReg);
         break;
       case 2: // LC
         registers[destReg] = constant;
+        System.out.println("LC "+ constant + " "+ destReg);
         break;
       case 3: // BNE
         if (value1 != value2) {
           instructionAddress = instructionAddr;
         }
+        System.out.println("BC "+ value1 + " "+ value2 );
+
         break;
       case 4: // EMC
-        System.out.print((byte) constant);
+        System.out.println("EMC "+ " "+ constant);
         break;
       case 5: // EMR
-        System.out.print((byte) registers[destReg]);
+        System.out.println("EMR "+ " "+ (byte) registers[destReg]);
         break;
       case 6: // ADDC
         registers[destReg] = (value1 + constant) % MAX_BYTE_VALUE;
+        System.out.println("ADD "+ constant + " "+ value1 + " "+ destReg);
         break;
       case 7: // XOR
         registers[destReg] = value1 ^ value2;
+        System.out.println("XOR "+ " "+ value1 + " "+ value2);
         break;
     }
   }
@@ -114,7 +121,7 @@ public class SimulatedComputer {
     for (int i = 0; i < numSimulations; i++) {
       generateRandomProgram();
       runProgram();
-      System.out.println(); // New line between simulations
+      System.out.println("--------------------------"); // New line between simulations
       clearRegisters();
     }
   }
